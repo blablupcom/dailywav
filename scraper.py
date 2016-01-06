@@ -74,7 +74,7 @@ def scrape_page(base_url):
                             except:
                                  duration = ''
                         print duration
-                        print movie_name, transcript
+                        print movie_name.encode('utf-8'), transcript.encode('utf-8')
                         scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
@@ -119,7 +119,7 @@ def scrape_page(base_url):
                                  duration = ''
 
                         print duration
-                        print movie_name, transcript
+                         print movie_name.encode('utf-8'), transcript.encode('utf-8')
                         scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
@@ -173,7 +173,7 @@ def scrape_page(base_url):
                                 except:
                                      duration = ''
                             print duration
-                            print movie_name, transcript
+                             print movie_name.encode('utf-8'), transcript.encode('utf-8')
                             scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
                             yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
