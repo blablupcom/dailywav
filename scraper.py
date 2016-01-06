@@ -10,16 +10,16 @@ import itertools
 import wave
 import scraperwiki
 
-ua = {'User-agent': 'Mozilla/5.0'}
-proxies = {'http': 'http://66.76.24.115:3128'}
+# ua = {'User-agent': 'Mozilla/5.0'}
+# proxies = {'http': 'http://66.76.24.115:3128'}
 def scrape_page(base_url):
-        page = requests.get(base_url, headers= ua, proxies=proxies)
+        page = requests.get(base_url, headers= ua)
         soup = bs(page.text, 'lxml')
 
         links = soup.find('table', 'archives').find_all('a')
         for link in links:
             title_link = 'http://www.dailywav.com'+link['href']
-            title_page = requests.get(title_link, headers= ua, proxies=proxies)
+            title_page = requests.get(title_link, headers= ua)
             title_soup = bs(title_page.text, 'lxml')
             files_links = title_soup.find('table', 'views-view-grid cols-3').find_all('a')
 
@@ -27,7 +27,7 @@ def scrape_page(base_url):
                 print files_link['href']
                 movie_link = 'http://www.dailywav.com'+files_link['href']
                 movie_name = files_link.text.strip()
-                movie_page = requests.get(movie_link, headers= ua, proxies=proxies)
+                movie_page = requests.get(movie_link, headers= ua)
                 movie_soup = bs(movie_page.text, 'lxml')
                 next_link = ''
                 try:
@@ -52,8 +52,8 @@ def scrape_page(base_url):
                         file_type = file_url.split('.')[-1]
                         categories = 'Shows'
                         try:
-                            opener = urllib.FancyURLopener(proxies)
-                            filename = opener.retrieve(file_url)
+                        #     opener = urllib.FancyURLopener(proxies)
+                            filename = urlretrieve(file_url)
                             audio = MP3(filename[0])
                             if audio.info.length < 1:
                                 length = int(math.ceil(audio.info.length))
@@ -62,8 +62,8 @@ def scrape_page(base_url):
                             duration = length
                         except:
                             try:
-                                 opener = urllib.FancyURLopener(proxies)
-                                 filename, headers = opener.retrieve(file_url)
+                                #  opener = urllib.FancyURLopener(proxies)
+                                 filename, headers = urlretrieve(file_url)
                                  wfile = wave.open (filename, "r")
                                  time = (1.0 * wfile.getnframes()) / wfile.getframerate()
                                  if time < 1:
@@ -96,8 +96,8 @@ def scrape_page(base_url):
                         file_type = file_url.split('.')[-1]
                         categories = 'Shows'
                         try:
-                            opener = urllib.FancyURLopener(proxies)
-                            filename = opener.retrieve(file_url)
+                        #     opener = urllib.FancyURLopener(proxies)
+                            filename = urlretrieve(file_url)
                             audio = MP3(filename[0])
                             if audio.info.length < 1:
                                 length = int(math.ceil(audio.info.length))
@@ -106,8 +106,8 @@ def scrape_page(base_url):
                             duration = length
                         except:
                             try:
-                                 opener = urllib.FancyURLopener(proxies)
-                                 filename, headers = opener.retrieve(file_url)
+                                #  opener = urllib.FancyURLopener(proxies)
+                                 filename, headers = urlretrieve(file_url)
                                  wfile = wave.open (filename, "r")
                                  time = (1.0 * wfile.getnframes()) / wfile.getframerate()
                                  if time < 1:
@@ -119,12 +119,12 @@ def scrape_page(base_url):
                                  duration = ''
 
                         print duration
-                         print movie_name.encode('utf-8'), transcript.encode('utf-8')
+                        print movie_name.encode('utf-8'), transcript.encode('utf-8')
                         scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                     for paged in itertools.count():
-                        movie_page = requests.get(movie_link+'?page={}'.format(paged+1), headers= ua, proxies=proxies)
+                        movie_page = requests.get(movie_link+'?page={}'.format(paged+1), headers= ua)
                         print movie_link+'?page={}'.format(paged+1)
                         movie_soup = bs(movie_page.text, 'lxml')
                         find_node = ''
@@ -151,8 +151,8 @@ def scrape_page(base_url):
                             file_type = file_url.split('.')[-1]
                             categories = 'Shows'
                             try:
-                                opener = urllib.FancyURLopener(proxies)
-                                filename = opener.retrieve(file_url)
+                                # opener = urllib.FancyURLopener(proxies)
+                                filename = urlretrieve(file_url)
                                 audio = MP3(filename[0])
                                 if audio.info.length < 1:
                                     length = int(math.ceil(audio.info.length))
@@ -161,8 +161,8 @@ def scrape_page(base_url):
                                 duration = length
                             except:
                                 try:
-                                     opener = urllib.FancyURLopener(proxies)
-                                     filename, headers = opener.retrieve(file_url)
+                                #      opener = urllib.FancyURLopener(proxies)
+                                     filename, headers = urlretrieve(file_url)
                                      wfile = wave.open (filename, "r")
                                      time = (1.0 * wfile.getnframes()) / wfile.getframerate()
                                      if time < 1:
@@ -173,7 +173,7 @@ def scrape_page(base_url):
                                 except:
                                      duration = ''
                             print duration
-                             print movie_name.encode('utf-8'), transcript.encode('utf-8')
+                            print movie_name.encode('utf-8'), transcript.encode('utf-8')
                             scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
                             yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
