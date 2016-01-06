@@ -8,6 +8,7 @@ import json
 import math
 import itertools
 import wave
+import scraperwiki
 
 ua = {'User-agent': 'Mozilla/5.0'}
 proxies = {'http': 'http://66.76.24.115:3128'}
