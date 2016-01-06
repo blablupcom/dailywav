@@ -1,6 +1,7 @@
 -e git+http://github.com/openaustralia/scraperwiki-python.git@morph_defaults#egg=scraperwiki
 lxml==3.4.4
 cssselect==0.9.1
+requests
 beautifulsoup4
 urllib
 mutagen
