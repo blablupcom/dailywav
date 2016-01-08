@@ -50,7 +50,11 @@ def scrape_page(base_url):
                         file_url = node.find('div', 'content quotes').find('div', 'field field-name-field-quote-text field-type-text-long field-label-hidden').find_previous('a')['href']
                         transcript = node.find('div', 'content quotes').find('p').text.strip()
                         file_type = file_url.split('.')[-1]
-                        tags = node.find_all('div', 'field-item')
+                        tags = []
+                        try:
+                            tags = node.find_all('div', 'field-item')
+                        except:
+                            pass
                         tagslist = []
                         for tag in tags:
                             tagslist.append(tag.find('span').text.strip().split('#')[-1])
@@ -78,8 +82,8 @@ def scrape_page(base_url):
                             except:
                                  duration = ''
                         print duration
-                        print movie_name.encode('utf-8'), transcript.encode('utf-8')
-                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
+                        print movie_name.encode('utf-8'), transcript.encode('utf-8'), tagslist
+                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": tagslist})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                 else:
@@ -99,7 +103,11 @@ def scrape_page(base_url):
                         transcript = node.find('div', 'content quotes').find('p').text.strip()
                         file_type = file_url.split('.')[-1]
                         categories = 'Shows'
-                        tags = node.find_all('div', 'field-item')
+                        tags = []
+                        try:
+                            tags = node.find_all('div', 'field-item')
+                        except:
+                            pass
                         tagslist = []
                         for tag in tags:
                             tagslist.append(tag.find('span').text.strip().split('#')[-1])
@@ -127,8 +135,8 @@ def scrape_page(base_url):
                                  duration = ''
 
                         print duration
-                        print movie_name.encode('utf-8'), transcript.encode('utf-8')
-                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
+                        print movie_name.encode('utf-8'), transcript.encode('utf-8'), tagslist
+                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": tagslist})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                     for paged in itertools.count():
@@ -157,7 +165,11 @@ def scrape_page(base_url):
                             file_url = node.find('div', 'content quotes').find('div', 'field field-name-field-quote-text field-type-text-long field-label-hidden').find_previous('a')['href']
                             transcript = node.find('div', 'content quotes').find('p').text.strip()
                             file_type = file_url.split('.')[-1]
-                            tags = node.find_all('div', 'field-item')
+                            tags = []
+                            try:
+                                tags = node.find_all('div', 'field-item')
+                            except:
+                                pass
                             tagslist = []
                             for tag in tags:
                                 tagslist.append(tag.find('span').text.strip().split('#')[-1])
@@ -185,8 +197,8 @@ def scrape_page(base_url):
                                 except:
                                      duration = ''
                             print duration
-                            print movie_name.encode('utf-8'), transcript.encode('utf-8')
-                            scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url})
+                            print movie_name.encode('utf-8'), transcript.encode('utf-8'), tagslist
+                            scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": tagslist})
                             yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
 
