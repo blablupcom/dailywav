@@ -84,7 +84,7 @@ def scrape_page(base_url):
                                  duration = ''
                         
                         print movie_name.encode('utf-8'), transcript.encode('utf-8'), Tags
-                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": unicode(Tags)})
+                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl": unicode(movie_link), "movie name": inicode(movie_name), "transcript": inicode(transcript), "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": unicode(Tags)})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                 else:
@@ -136,7 +136,7 @@ def scrape_page(base_url):
                             except:
                                  duration = ''
                         print movie_name.encode('utf-8'), transcript.encode('utf-8'), Tags
-                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": unicode(Tags)})
+                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl": unicode(movie_link), "movie name": inicode(movie_name), "transcript": inicode(transcript), "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": unicode(Tags)})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                     for paged in itertools.count():
@@ -198,7 +198,7 @@ def scrape_page(base_url):
                                 except:
                                      duration = ''
                             print movie_name.encode('utf-8'), transcript.encode('utf-8'), Tags
-                            scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": unicode(Tags)})
+                            scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl": unicode(movie_link), "movie name": inicode(movie_name), "transcript": inicode(transcript), "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": unicode(Tags)})
                             yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
 
