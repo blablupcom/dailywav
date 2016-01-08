@@ -1,3 +1,6 @@
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 import requests
 from bs4 import BeautifulSoup as bs
 import re
