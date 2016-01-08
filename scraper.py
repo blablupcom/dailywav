@@ -57,7 +57,7 @@ def scrape_page(base_url):
                             pass
                         tagslist = []
                         for tag in tags:
-                            tagslist.append(tag.find('span').text.strip().split('#')[-1])
+                            tagslist.append(tag.find('span').text.strip().split('#')[-1].encode('utf-8'))
                         Tags = ', '.join(tagslist)
                         categories = 'Shows'
                         try:
@@ -111,7 +111,7 @@ def scrape_page(base_url):
                             pass
                         tagslist = []
                         for tag in tags:
-                            tagslist.append(tag.find('span').text.strip().split('#')[-1])
+                            tagslist.append(tag.find('span').text.strip().split('#')[-1].encode('utf-8'))
                         Tags = ', '.join(tagslist)
                         try:
                         #     opener = urllib.FancyURLopener(proxies)
@@ -172,7 +172,7 @@ def scrape_page(base_url):
                                 pass
                             tagslist = []
                             for tag in tags:
-                                tagslist.append(tag.find('span').text.strip().split('#')[-1])
+                                tagslist.append(tag.find('span').text.strip().split('#')[-1].encode('utf-8'))
                             Tags = ', '.join(tagslist)
                             categories = 'Shows'
                             try:
