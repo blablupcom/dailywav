@@ -57,7 +57,6 @@ def scrape_page(base_url):
                             pass
                         tagslist = []
                         for tag in tags:
-                            print tag
                             tagslist.append(tag.find('span').text.strip().split('#')[-1])
                         Tags = ', '.join(tagslist)
                         categories = 'Shows'
