@@ -59,6 +59,7 @@ def scrape_page(base_url):
                         for tag in tags:
                             print tag
                             tagslist.append(tag.find('span').text.strip().split('#')[-1])
+                        Tags = ', '.join(tagslist)
                         categories = 'Shows'
                         try:
                         #     opener = urllib.FancyURLopener(proxies)
@@ -83,8 +84,8 @@ def scrape_page(base_url):
                             except:
                                  duration = ''
                         print duration
-                        print movie_name.encode('utf-8'), transcript.encode('utf-8'), tagslist
-                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": tagslist})
+                        print movie_name.encode('utf-8'), transcript.encode('utf-8'), Tags
+                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": Tags})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                 else:
@@ -112,6 +113,7 @@ def scrape_page(base_url):
                         tagslist = []
                         for tag in tags:
                             tagslist.append(tag.find('span').text.strip().split('#')[-1])
+                        Tags = ', '.join(tagslist)
                         try:
                         #     opener = urllib.FancyURLopener(proxies)
                             filename = urlretrieve(file_url)
@@ -136,8 +138,8 @@ def scrape_page(base_url):
                                  duration = ''
 
                         print duration
-                        print movie_name.encode('utf-8'), transcript.encode('utf-8'), tagslist
-                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": tagslist})
+                        print movie_name.encode('utf-8'), transcript.encode('utf-8'), Tags
+                        scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": Tags})
                         yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
                     for paged in itertools.count():
@@ -174,6 +176,7 @@ def scrape_page(base_url):
                             tagslist = []
                             for tag in tags:
                                 tagslist.append(tag.find('span').text.strip().split('#')[-1])
+                            Tags = ', '.join(tagslist)
                             categories = 'Shows'
                             try:
                                 # opener = urllib.FancyURLopener(proxies)
@@ -198,8 +201,8 @@ def scrape_page(base_url):
                                 except:
                                      duration = ''
                             print duration
-                            print movie_name.encode('utf-8'), transcript.encode('utf-8'), tagslist
-                            scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": tagslist})
+                            print movie_name.encode('utf-8'), transcript.encode('utf-8'), Tags
+                            scraperwiki.sqlite.save(unique_keys=['fileUrl'], data={"sourceUrl":movie_link, "movie name": movie_name, "transcript": transcript, "fileType": file_type, "fileUrl":file_url, "duration":duration, "categories":categories, "imageUrl":image_url, "tags": Tags})
                             yield movie_link, movie_name, transcript,  file_type, file_url, duration, categories, image_url
 
 
