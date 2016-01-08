@@ -50,6 +50,10 @@ def scrape_page(base_url):
                         file_url = node.find('div', 'content quotes').find('div', 'field field-name-field-quote-text field-type-text-long field-label-hidden').find_previous('a')['href']
                         transcript = node.find('div', 'content quotes').find('p').text.strip()
                         file_type = file_url.split('.')[-1]
+                        tags = node.find_all('div', 'field-item')
+                        tagslist = []
+                        for tag in tags:
+                            tagslist.append(tag.find('span').text.strip().split('#')[-1])
                         categories = 'Shows'
                         try:
                         #     opener = urllib.FancyURLopener(proxies)
@@ -95,6 +99,10 @@ def scrape_page(base_url):
                         transcript = node.find('div', 'content quotes').find('p').text.strip()
                         file_type = file_url.split('.')[-1]
                         categories = 'Shows'
+                        tags = node.find_all('div', 'field-item')
+                        tagslist = []
+                        for tag in tags:
+                            tagslist.append(tag.find('span').text.strip().split('#')[-1])
                         try:
                         #     opener = urllib.FancyURLopener(proxies)
                             filename = urlretrieve(file_url)
@@ -149,6 +157,10 @@ def scrape_page(base_url):
                             file_url = node.find('div', 'content quotes').find('div', 'field field-name-field-quote-text field-type-text-long field-label-hidden').find_previous('a')['href']
                             transcript = node.find('div', 'content quotes').find('p').text.strip()
                             file_type = file_url.split('.')[-1]
+                            tags = node.find_all('div', 'field-item')
+                            tagslist = []
+                            for tag in tags:
+                                tagslist.append(tag.find('span').text.strip().split('#')[-1])
                             categories = 'Shows'
                             try:
                                 # opener = urllib.FancyURLopener(proxies)
