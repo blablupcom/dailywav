@@ -52,11 +52,12 @@ def scrape_page(base_url):
                         file_type = file_url.split('.')[-1]
                         tags = []
                         try:
-                            tags = node.find_all('div', 'field-item')
+                            tags = node.find('nav', 'taxonomy').find_all('div', 'field-item')
                         except:
                             pass
                         tagslist = []
                         for tag in tags:
+                            print tag
                             tagslist.append(tag.find('span').text.strip().split('#')[-1])
                         categories = 'Shows'
                         try:
@@ -105,7 +106,7 @@ def scrape_page(base_url):
                         categories = 'Shows'
                         tags = []
                         try:
-                            tags = node.find_all('div', 'field-item')
+                            tags = node.find('nav', 'taxonomy').find_all('div', 'field-item')
                         except:
                             pass
                         tagslist = []
@@ -167,7 +168,7 @@ def scrape_page(base_url):
                             file_type = file_url.split('.')[-1]
                             tags = []
                             try:
-                                tags = node.find_all('div', 'field-item')
+                                tags = node.find('nav', 'taxonomy').find_all('div', 'field-item')
                             except:
                                 pass
                             tagslist = []
