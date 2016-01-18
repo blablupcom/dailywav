@@ -13,7 +13,7 @@ import itertools
 import wave
 import scraperwiki
 
-ua = {'User-agent': 'Mozilla/5.0'}
+ua = {'User-agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; it; rv:1.8.1.11) Gecko/20071127 Firefox/2.0.0.11'}
 # proxies = {'http': 'http://66.76.24.115:3128'}
 def scrape_page(base_url):
         page = requests.get(base_url, headers= ua)
