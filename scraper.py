@@ -18,7 +18,7 @@ ua = {'User-agent': 'Mozilla/5.0'}
 def scrape_page(base_url):
         page = requests.get(base_url, headers= ua)
         soup = bs(page.text, 'lxml')
-
+        print soup
         links = soup.find('table', 'archives').find_all('a')
         for link in links:
             title_link = 'http://www.dailywav.com'+link['href']
